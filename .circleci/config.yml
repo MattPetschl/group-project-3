@@ -5,10 +5,21 @@ jobs:
       only:
         - master
     docker:
-      - image: node:latest
+      - image: circleci/node:latest
     environment:
-      FOO: bar
+      LOL: u
     steps:
       - checkout
-      - run: yarn
-      # - run: 
+      - run:
+          command: |
+            cd frontend
+            yarn
+            yarn build
+            cd build
+            ls -la
+      - run:
+          command: |
+            cd backend
+            yarn
+            yarn start:background
+            curl http://localhost:3000/
