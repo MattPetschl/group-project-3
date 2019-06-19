@@ -21,5 +21,3 @@ jobs:
           command: |
             cd backend
             yarn
-            yarn start:background
-            curl http://localhost:3000/
