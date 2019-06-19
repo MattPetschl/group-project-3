@@ -28,7 +28,7 @@ jobs:
       - run: # change this to deploy; but docs said it would be disabled with ssh usages
           name: deploy
           command: |
-            apt update -y && apt install -y rsync
+            sudo apt update -y && sudo apt install -y rsync
             if [ "${CIRCLE_BRANCH}" = "master" ]; then
               rsync -avce ssh ./frontend/build root@matthewpetschl.com:/www/lol
             else
