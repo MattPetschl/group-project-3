@@ -19,6 +19,7 @@ CREATE TABLE events (
     eventLocation VARCHAR(100) NOT NULL,
     eventCategory VARCHAR(50),
     groupID VARCHAR(50), 
+    eventImageURL VARCHAR(50),
     eventDescription TEXT,
     boolean recurring NOT NULL
 
@@ -29,6 +30,17 @@ CREATE TABLE events (
 CREATE TABLE groups (
     groupName VARCHAR(50) NOT NULL,
     groupCategory VARCHAR(50),
+    groupImageURL VARCHAR(50)
 
     PRIMARY KEY (groupName)
+);
+
+CREATE TABLE user_events (
+    email VARCHAR(50) NOT NULL references users(email),
+    eventID INT(10) NOT NULL references events(eventID)
+);
+
+CREATE TABLE user_groups (
+    email VARCHAR(50) NOT NULL references users(email),
+    groupName VARCHAR(50) NOT NULL references events(groupName)
 );
