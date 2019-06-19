@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - master
+    docker:
+      - image: node:latest
+    environment:
+      FOO: bar
+    steps:
+      - checkout
+      - run: yarn
+      # - run: 
