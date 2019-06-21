@@ -3,7 +3,7 @@ jobs:
   build:
     branches:
       only:
-        - master
+        - develop
     docker:
       - image: circleci/node:stretch
     environment:
@@ -21,15 +21,16 @@ jobs:
           command: |
             cd backend
             yarn
-      - add_ssh_keys:
-          fingerprints:
-            - "4f:10:06:b3:ac:b5:5f:c6:ef:7f:a9:cb:5d:33:9d:10"
-      - run: echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
       - run:
           command: |
             mkdir -p ~/.ssh
             echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-
+      - run:
+          command: | 
+            echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
+      - add_ssh_keys:
+          fingerprints:
+            - "4f:10:06:b3:ac:b5:5f:c6:ef:7f:a9:cb:5d:33:9d:10"
       - run: # change this to deploy; but docs said it would be disabled with ssh usages
           name: deploy
           command: |
