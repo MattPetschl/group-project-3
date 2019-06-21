@@ -10,6 +10,9 @@ jobs:
       LOL: u
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "c8:24:98:b2:c4:df:97:b4:8b:34:e6:48:05:8f:de:f9"    
       - run:
           command: |
             cd frontend
@@ -28,9 +31,6 @@ jobs:
       - run:
           command: | 
             echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
-      - add_ssh_keys:
-          fingerprints:
-            - "4f:10:06:b3:ac:b5:5f:c6:ef:7f:a9:cb:5d:33:9d:10"
       - run: # change this to deploy; but docs said it would be disabled with ssh usages
           name: deploy
           command: |
