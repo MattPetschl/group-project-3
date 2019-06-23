@@ -36,7 +36,7 @@ jobs:
           command: |
             sudo apt update -y && sudo apt install -y rsync
             if [ "${CIRCLE_BRANCH}" = "develop" ]; then
-              rsync -avce ssh ./frontend/build matt@matthewpetschl.com:/www/lol
+              rsync -avce ssh ./frontend/build matt@matthewpetschl.com:/home/matt/www/lol
             else
               echo "Not master branch, dry run only"
             fi            
