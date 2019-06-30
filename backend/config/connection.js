@@ -17,7 +17,7 @@ else{
   port: 3306,
   user: "root",
   password: "root",
-  database: "AMass_db"
+  database: "amass_db"
 });
 
 // Make connection.
