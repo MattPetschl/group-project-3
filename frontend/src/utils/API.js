@@ -1,16 +1,20 @@
 import axios from "axios";
 
 export default {
-  getBooks: function() {
+  // Gets all events
+  getEvent: function() {
     return axios.get("/api/events");
   },
-  getBook: function(id) {
+  // Gets the events with the given id
+  getEvent: function(id) {
     return axios.get("/api/events/" + id);
   },
-  deleteBook: function(id) {
+  // Deletes the events with the given id
+  deleteEvent: function(id) {
     return axios.delete("/api/events/" + id);
   },
-  saveBook: function(eventData) {
+  // Saves a book to the database
+  saveEvent: function(eventData) {
     return axios.post("/api/events", eventData);
   }
 };

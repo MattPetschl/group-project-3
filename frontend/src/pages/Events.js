@@ -10,9 +10,11 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 class Events extends Component {
   state = {
     events: [],
-    title: "",
-    author: "",
-    synopsis: ""
+    eventName: "",
+    category: "",
+    description: "",
+    time: "",
+    location: ""
   };
 
   componentDidMount() {
@@ -22,7 +24,14 @@ class Events extends Component {
   loadEvents = () => {
     API.getEvents()
       .then(res =>
-        this.setState({ events: res.data, title: "", author: "", synopsis: "" })
+        this.setState({
+          events: res.data,
+          eventName: "",
+          category: "",
+          description: "",
+          time: "",
+          location: ""
+        })
       )
       .catch(err => console.log(err));
   };
@@ -42,11 +51,13 @@ class Events extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveEvent({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
+    if (this.state.eventName && this.state.category) {
+      API.saveBook({
+        eventName: this.state.eventName,
+        category: this.state.category,
+        description: this.state.description,
+        time: this.state.time,
+        location: this.state.location
       })
         .then(res => this.loadEvents())
         .catch(err => console.log(err));
@@ -59,49 +70,61 @@ class Events extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>Add a new event</h1>
+              <h1>Add Event</h1>
             </Jumbotron>
             <form>
               <Input
-                value={this.state.title}
+                value={this.state.eventName}
                 onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
+                name="eventName"
+                placeholder="Event Name (required)"
               />
               <Input
-                value={this.state.author}
+                value={this.state.category}
                 onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
+                name="category"
+                placeholder="Category (required)"
               />
               <TextArea
-                value={this.state.synopsis}
+                value={this.state.description}
                 onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
+                name="description"
+                placeholder="description (Optional)"
+              />
+              <TextArea
+                value={this.state.time}
+                onChange={this.handleInputChange}
+                name="time"
+                placeholder="time (required)"
+              />
+              <TextArea
+                value={this.state.location}
+                onChange={this.handleInputChange}
+                name="location"
+                placeholder="location (required)"
               />
               <FormBtn
-                disabled={!(this.state.author && this.state.title)}
+                disabled={!(this.state.category && this.state.eventName)}
                 onClick={this.handleFormSubmit}
               >
-                Submit
+                Submit New Event
               </FormBtn>
             </form>
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
-              <h1>Events On My List</h1>
+              <h1>All Events</h1>
             </Jumbotron>
             {this.state.events.length ? (
               <List>
-                {this.state.events.map(myEvent => (
-                  <ListItem key={myEvent._id}>
-                    <Link to={"/events/" + myEvent._id}>
+                {this.state.events.map(events => (
+                  <ListItem key={events._id}>
+                    <Link to={"/events/" + events._id}>
                       <strong>
-                        {myEvent.title} by {myEvent.author}
+                        {events.eventName} by {events.category}
                       </strong>
                     </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(myEvent._id)} />
+                    <DeleteBtn onClick={() => this.deleteEvent(events._id)} />
                   </ListItem>
                 ))}
               </List>

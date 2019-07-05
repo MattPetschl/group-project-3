@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
   eventName: { type: String, required: true },
-  creator: { type: String, required: true },
-  synopsis: String,
-  location: String,
+  category: { type: String, required: true },
+  description: String,
+  time: { type: String, required: true },
+  location: { type: String, required: true },
   date: { type: Date, default: Date.now }
 });
 

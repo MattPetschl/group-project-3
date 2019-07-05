@@ -2,32 +2,29 @@ const mongoose = require("mongoose");
 const db = require("../models");
 
 mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/reactreadinglist"
+  process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist"
 );
 
 const eventSeed = [
   {
     eventName: "Code the group project",
-    author: "Matt",
-    synopsis:
-      "Make a cool app so we all pass",
+    category: "dev",
+    description: "Make a cool app so we all pass",
+    time: "9:00 pm",
     location: "everywere",
     date: new Date(Date.now())
   },
   {
     title: "Play guild wars",
-    author: "Bob",
-    synopsis:
-      "play all the world bosses at server reset",
-    location:"lion's arch",
+    category: "gaming ",
+    description: "play all the world bosses at server reset",
+    time: "7:00 pm",
+    location: "lion's arch",
     date: new Date(Date.now())
-  },
- 
+  }
 ];
 
-db.Events
-  .remove({})
+db.Events.remove({})
   .then(() => db.Events.collection.insertMany(eventSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
