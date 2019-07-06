@@ -2,8 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const morgan = require("morgan");
 
 const app = express();
+app.use(morgan("combined"));
 const emailController = require("./controllers/email/email.controller");
 const { PORT, CLIENT_ORIGIN, DB_URL } = require("./config");
 
@@ -43,7 +45,7 @@ const options = {
   useNewUrlParser: true,
   useFindAndModify: false
 };
-
+console.log(DB_URL);
 // Connecting the database and then starting the app.
 mongoose
   .connect(DB_URL, options, () => {

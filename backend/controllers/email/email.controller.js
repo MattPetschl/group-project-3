@@ -10,11 +10,14 @@ exports.collectEmail = (req, res) => {
   User.findOne({ email })
     .then(user => {
       // We have a new user! Send them a confirmation email.
+      console.log("before user check ", user);
       if (!user) {
         User.create({ email })
-          .then(newUser =>
-            sendEmail(newUser.email, templates.confirm(newUser._id))
-          )
+          .then(newUser => {
+            console.log(newUser.email);
+
+            sendEmail(newUser.email, templates.confirm(newUser._id));
+          })
           .then(() => res.json({ msg: msgs.confirm }))
           .catch(err => console.log(err));
       }
@@ -22,6 +25,7 @@ exports.collectEmail = (req, res) => {
       // We have already seen this email address. But the user has not
       // clicked on the confirmation link. Send another confirmation email.
       else if (user && !user.confirmed) {
+        console.log("inside the else if", user, user.confirm);
         sendEmail(user.email, templates.confirm(user._id)).then(() =>
           res.json({ msg: msgs.resend })
         );
@@ -29,6 +33,7 @@ exports.collectEmail = (req, res) => {
 
       // The user has already confirmed this email address
       else {
+        console.log("else ", msgs);
         res.json({ msg: msgs.alreadyConfirmed });
       }
     })

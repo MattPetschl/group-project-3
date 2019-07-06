@@ -1,38 +1,18 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Component } from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Notifications from "react-notify-toast";
 
 import Events from "./pages/Events";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
 import Landing from "./components/Landing";
 import Confirm from "./components/Confirm";
-import Spinner from "./components/Spinner";
-import Footer from "./components/Footer/Footer";
 import { API_URL } from "./config";
 import "./App.css";
 
 export default class App extends Component {
-  state = {
-    loading: true
-  };
-
-  componentDidMount = () => {
-    fetch(`${API_URL}/wake-up`)
-      .then(res => res.json())
-      .then(() => {
-        this.setState({ loading: false });
-      })
-      .catch(err => console.log(err));
-  };
-
   render = () => {
     const content = () => {
-      if (this.state.loading) {
-        return <Spinner size="8x" spinning="spinning" />;
-      }
-
       return (
         <BrowserRouter>
           <Switch>
@@ -43,10 +23,10 @@ export default class App extends Component {
           */}
             <Route exact path="/confirm/:id" component={Confirm} />
             <Route exact path="/" component={Landing} />
-            <Redirect from="*" to="/" />
             <Route exact path="/events" component={Events} />
             <Route exact path="/events/:id" component={Detail} />
             <Route component={NoMatch} />
+            <Redirect from="*" to="/" />
           </Switch>
         </BrowserRouter>
       );
