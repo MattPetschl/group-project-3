@@ -7,14 +7,14 @@ export default {
   },
   // Gets the events with the given id
   getEvent: function(id) {
-    return axios.get("/api/events/" + id);
+    return axios.get("/api/event/" + id);
   },
   // Deletes the events with the given id
   deleteEvent: function(id) {
-    return axios.delete("/api/events/" + id);
+    return axios.delete("/api/event/" + id);
   },
   // Saves a book to the database
   saveEvent: function(eventData) {
-    return axios.post("/api/events", eventData);
+    return axios.post("/api/event", eventData);
   }
 };

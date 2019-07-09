@@ -8,7 +8,7 @@ const app = express();
 app.use(morgan("combined"));
 const emailController = require("./controllers/email/email.controller");
 const { PORT, CLIENT_ORIGIN, DB_URL } = require("./config");
-
+console.log(PORT);
 // Only allow requests from our client
 app.use(
   cors({

@@ -22,7 +22,7 @@ class Events extends Component {
   }
 
   loadEvents = () => {
-    API.getEvents()
+    API.getEvent()
       .then(res =>
         this.setState({
           events: res.data,
@@ -52,7 +52,7 @@ class Events extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.eventName && this.state.category) {
-      API.saveBook({
+      API.saveEvent({
         eventName: this.state.eventName,
         category: this.state.category,
         description: this.state.description,
