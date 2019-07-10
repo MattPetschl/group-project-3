@@ -5,6 +5,9 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
+
+const apiRoutes = require("./routes/api");
+
 app.use(morgan("combined"));
 const emailController = require("./controllers/email/email.controller");
 const { PORT, CLIENT_ORIGIN, DB_URL } = require("./config");
@@ -33,6 +36,15 @@ app.post("/email", emailController.collectEmail);
 // Same as above, but this is the endpoint pinged in the componentDidMount of
 // Confirm.js on the client.
 app.get("/email/confirm/:id", emailController.confirmEmail);
+
+// all api endpoints; see apiRoutes file for more details on available routes
+// see {base}/api/{module} for api
+app.use("/api", apiRoutes);
+
+// health check endpoint; tells you if the server is running right now
+app.get("/", (req, res) => {
+  res.json({ time: Date.now(), message: "group project 3" });
+});
 
 // Catch all to handle all other requests that come into the app.
 app.use("*", (req, res) => {
