@@ -57,7 +57,6 @@ const options = {
   useNewUrlParser: true,
   useFindAndModify: false
 };
-console.log(DB_URL);
 // Connecting the database and then starting the app.
 mongoose
   .connect(DB_URL, options, () => {
