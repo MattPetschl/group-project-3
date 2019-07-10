@@ -22,7 +22,7 @@ class Events extends Component {
   }
 
   loadEvents = () => {
-    API.getEvent()
+    API.getEvents()
       .then(res =>
         this.setState({
           events: res.data,
