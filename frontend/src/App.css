@@ -28,7 +28,7 @@ main {
 /* Form */
 form {
   position: relative;
-  display: flex;
+  /* display: flex; */
 }
 
 input {
