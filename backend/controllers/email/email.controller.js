@@ -25,15 +25,20 @@ exports.collectEmail = (req, res) => {
       // We have already seen this email address. But the user has not
       // clicked on the confirmation link. Send another confirmation email.
       else if (user && !user.confirmed) {
-        console.log("inside the else if", user, user.confirm);
-        sendEmail(user.email, templates.confirm(user._id)).then(() =>
-          res.json({ msg: msgs.resend })
+        // for the sake of demo, auto confirm all double emails
+        console.log(
+          "skipping reconfirmation email; auto confirmation enabled",
+          user.email,
+          user.confirmed
         );
+        User.updateOne({ email: user.email }, { confirmed: true }).then(() => {
+          res.json({ msg: "Auto confirmed" });
+        });
       }
 
       // The user has already confirmed this email address
       else {
-        console.log("else ", msgs);
+        console.log("user already confirmed", user.email);
         res.json({ msg: msgs.alreadyConfirmed });
       }
     })
