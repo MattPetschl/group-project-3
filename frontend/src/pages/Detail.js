@@ -40,8 +40,8 @@ class Detail extends Component {
           </Col>
         </Row>
         <Row>
-          <Col size="md-2">
-            <Link to="/">← </Link>
+          <Col size="md-3">
+            <Link to="/events">← Back to all events</Link>
           </Col>
         </Row>
       </Container>
