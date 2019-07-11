@@ -91,13 +91,13 @@ class Events extends Component {
                 name="description"
                 placeholder="description (Optional)"
               />
-              <TextArea
+              <Input
                 value={this.state.time}
                 onChange={this.handleInputChange}
                 name="time"
                 placeholder="time (required)"
               />
-              <TextArea
+              <Input
                 value={this.state.location}
                 onChange={this.handleInputChange}
                 name="location"
@@ -121,7 +121,7 @@ class Events extends Component {
                   <ListItem key={events._id}>
                     <Link to={"/events/" + events._id}>
                       <strong>
-                        {events.eventName} by {events.category}
+                        {events.eventName} in category {events.category}
                       </strong>
                     </Link>
                     <DeleteBtn onClick={() => this.deleteEvent(events._id)} />
