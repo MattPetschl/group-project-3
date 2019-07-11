@@ -7,10 +7,15 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
-        Pupster
+        Amass
       </Link>
       <div>
         <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link className="nav-link" to="/about">
+              About
+            </Link>
+          </li>
           <li className="nav-item">
             <Link
               to="/"

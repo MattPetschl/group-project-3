@@ -9,6 +9,9 @@ import Landing from "./components/Landing";
 import Confirm from "./components/Confirm";
 import { API_URL } from "./config";
 import "./App.css";
+import { About } from "./pages/About";
+import { Signin } from "./pages/SignIn";
+import { Signup } from "./pages/SignUp";
 
 export default class App extends Component {
   render = () => {
@@ -22,7 +25,10 @@ export default class App extends Component {
             component at this.props.match.params.id 
           */}
             <Route exact path="/confirm/:id" component={Confirm} />
-            <Route exact path="/" component={Landing} />
+            {/* <Route exact path="/" component={Landing} /> */}
+            <Route exact path="/" component={Signin} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/about" component={About} />
             <Route exact path="/events" component={Events} />
             <Route exact path="/events/:id" component={Detail} />
             <Route component={NoMatch} />

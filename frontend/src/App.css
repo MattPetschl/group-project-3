@@ -6,17 +6,17 @@ body {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   height: 100vh;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
-main {
+/* main {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .flex-column {
   display: flex;
